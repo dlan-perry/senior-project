@@ -8,7 +8,8 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
-        //SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive); //don't do this
+        //LeaderboardtoMainMenu(); //testing
+        //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single); //don't do this
     }
     public void PlayGame()
     {
