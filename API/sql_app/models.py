@@ -10,5 +10,4 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name  = Column(String, index=True)
-    topScore = Column(Integer, index=True)
-    scoreDate = Column(DateTime(timezone=True), index=True)
+

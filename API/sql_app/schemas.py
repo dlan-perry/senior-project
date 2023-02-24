@@ -9,10 +9,12 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     pass
 
+    class Config:
+        orm_mode = True
+
 class User(UserBase):
     id: int
-    topScore: int | None = None
-    scoreDate: DateTime | None = None 
 
     class Config:
         orm_mode = True
+        arbitrary_types_allowed = True
