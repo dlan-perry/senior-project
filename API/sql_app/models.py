@@ -8,6 +8,10 @@ class User(Base):
     __tablename__ = "users"
 
 
-    id = Column(Integer, primary_key=True, index=True)
-    name  = Column(String, index=True)
+    user_id = Column(Integer, primary_key=True, index=True)
+    username  = Column(String, index=True)
+    password = Column(String)
+    salt = Column(String)
+    high_score = Column(Integer)
+    high_score_date = Column(DateTime)
 

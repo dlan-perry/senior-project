@@ -7,6 +7,5 @@ app = FastAPI()
 async def root():
     return {"message" : "Hello World"}
 
-async def get_user():
     
     pass
