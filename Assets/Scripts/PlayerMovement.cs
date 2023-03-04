@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
-public class theman : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float xInput, yInput;
