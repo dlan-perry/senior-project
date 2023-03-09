@@ -14,7 +14,7 @@ public class LeaderboardController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // nothing right now
+        // get scores at start
         ShowScores();
     }
 
@@ -29,7 +29,7 @@ public class LeaderboardController : MonoBehaviour
 
     public void ShowScores()
     {
-        GetLBScores(); //
+        GetLBScores(); // get scores before displaying
         
         //display scores onto TMP elements
         for (int i = 0; i < scores.GetLength(0); i++)
