@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    //[SerializeField] private GameObject score;
+
     void Start()
     {
         Time.timeScale = 1;
@@ -14,6 +16,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene("Game", LoadSceneMode.Single); //Loads Game scene
+        //score.ResetScore();
     }
 
     public void QuitGame()

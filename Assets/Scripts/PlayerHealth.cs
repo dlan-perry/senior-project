@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {   
@@ -18,7 +19,15 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HealthBar.fillAmount = health / maxHealth;    
+        HealthBar.fillAmount = health / maxHealth;
+        if (health <= 0)
+        {
+            // show lose screen
+            // send score
+            // reset score
+            SceneManager.LoadScene("Leaderboard", LoadSceneMode.Single);
+        }
+        
     }
 
     public float getHealth()

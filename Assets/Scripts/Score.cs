@@ -12,6 +12,15 @@ public class Score : MonoBehaviour
     //public bool inGame = true;
     //public float pointIncreasedPerSecond = 1f;
 
+    private void Start()
+    {
+        scorePoint = 0;
+    }
+
+    /*public void ResetScore()
+    {
+        scorePoint = 0;
+    }*/
 
     public void Update()
     {
