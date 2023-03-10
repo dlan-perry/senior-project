@@ -16,7 +16,7 @@ def get_db():
         yield db
     finally:
         db.close()
-
+#staple72
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -68,6 +68,10 @@ async def login(form_data:OAuth2PasswordRequestForm = Depends(),  db: Session = 
         raise HTTPException(status_code=400, detail="Incorrect username or password")
 
     return {"access_token": user.username, "token_type": "bearer"}
+
+@app.get("/score/{user_id}/{score}")
+def score(user_id: int, score: int,db:Session = Depends(get_db)):
+    crud.update_score(user_id, score, db)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)

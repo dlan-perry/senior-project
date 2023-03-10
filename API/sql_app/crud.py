@@ -15,3 +15,8 @@ def create_user(db: Session, user:schemas.UserCreate):
     db.commit()
     db.refresh(db_user)
     return db_user
+
+def update_score( user_id: int, score: int, db: Session):
+    db_user = db.query(models.User).filter(models.User.user_id==user_id).first()
+    db_user.high_score = score
+    db.commit()
