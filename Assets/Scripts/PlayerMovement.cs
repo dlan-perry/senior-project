@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private float xInput, yInput;
     public int speed = 10;
     private bool isMoving;
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,5 +39,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Score.scorePoint += 1;
         }
+
     }
+
 }

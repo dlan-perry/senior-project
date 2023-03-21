@@ -11,7 +11,8 @@ public class DamagePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerHealth p = GetComponent<PlayerHealth>();
+        p = GameObject.FindGameObjectsWithTag("health")[0].GetComponent<PlayerHealth>();
+        //PlayerHealth p = GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame

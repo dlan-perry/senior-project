@@ -6,11 +6,12 @@ public class MoveToPlayer : MonoBehaviour
 {
     public float speed = 0.5f;
     public float stopDistance = 4f;
-    [SerializeField] private GameObject player;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("player");
     }
 
     // Update is called once per frame
