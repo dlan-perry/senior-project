@@ -22,7 +22,7 @@ public class Score : MonoBehaviour
         
         if(period > 5)
         {
-            API_Helper.ScoreUser(2, scorePoint);
+        //API_Helper.ScoreUser(2, scorePoint);
             period = 0;
         }
         period += UnityEngine.Time.deltaTime;

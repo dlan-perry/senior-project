@@ -25,3 +25,16 @@ class User(UserBase):
     class Config:
         orm_mode = True
         arbitrary_types_allowed = True
+
+
+class UserLogin(UserBase):
+    password: str
+
+
+class ScoreSchema(BaseModel):
+    user_id:int
+    score: int
+
+class FollowSchema(BaseModel):
+    user_id: int
+    follow_id: int
