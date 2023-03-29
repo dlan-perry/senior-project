@@ -11,7 +11,10 @@ public class PlayerMovement : MonoBehaviour
     private float xInput, yInput;
     public int speed = 10;
     private bool isMoving;
+    public float period = 20f;
+    public int aoe = 5;
 
+    public GameObject[] objs;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +42,22 @@ public class PlayerMovement : MonoBehaviour
         {
             Score.scorePoint += 1;
         }
+
+        if(Input.GetKeyDown("o"))
+        {
+            objs = GameObject.FindGameObjectsWithTag("enemy");
+            foreach(GameObject obj in objs)
+            {
+                if(Vector3.Distance(transform.position, obj.transform.position) < aoe)
+                {
+                    obj.GetComponent<EnemyStats>().damageEnemy(5f);
+                }
+
+            }
+
+            period = 0;
+        }
+        period += UnityEngine.Time.deltaTime;
 
     }
 

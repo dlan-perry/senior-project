@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
     public float health = 100f;
-    public float damage = 1f;
+    public float damage = 0f;
     public float period = 0.1f;
     // Start is called before the first frame update
     void Start()
@@ -28,5 +28,10 @@ public class EnemyStats : MonoBehaviour
         Destroy(gameObject);
     }
 
+    }
+
+    public void damageEnemy(float d)
+    {
+        health-=d;
     }
 }
