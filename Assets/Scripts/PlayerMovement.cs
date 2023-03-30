@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoving;
     public float period = 20f;
     public int aoe = 5;
+    private string last;
 
     public GameObject[] objs;
 
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         isMoving = false;
+        last = "s";
     }
 
     // Update is called once per frame
@@ -42,6 +44,59 @@ public class PlayerMovement : MonoBehaviour
         {
             Score.scorePoint += 1;
         }
+
+        if(Input.GetKeyDown("a")) {last = "a";}
+        else if(Input.GetKeyDown("s")){last = "s";}
+        else if(Input.GetKeyDown("w")){last = "a";}
+        else if(Input.GetKeyDown("d")){last = "d";}
+
+        if(Input.GetKeyDown("i"))
+        {
+            objs = GameObject.FindGameObjectsWithTag("enemy");
+            foreach(GameObject obj in objs)
+            {
+                switch(last)
+                {
+                    case "a":
+                        Vector3 tmp = new Vector3(-2f, 0, 0);
+                        tmp+=transform.position;
+                        if(Vector3.Distance(tmp, obj.transform.position)< 2)
+                        {
+                            obj.GetComponent<EnemyStats>().damageEnemy(9f);
+                        }
+                        break;
+
+                    case "s":
+                        Vector3 tm = new Vector3(0, -2f, 0);
+                        tm+=transform.position;
+                        if(Vector3.Distance(tm, obj.transform.position)< 2)
+                        {
+                            obj.GetComponent<EnemyStats>().damageEnemy(9f);
+                        }
+                        break;
+                    case "d":
+                        Vector3 t = new Vector3(2f, 0, 0);
+                        t+=transform.position;
+                        if(Vector3.Distance(t, obj.transform.position)< 2)
+                        {
+                            obj.GetComponent<EnemyStats>().damageEnemy(9f);
+                        }
+                        break;
+                    case "w":
+                        Vector3 tmpp = new Vector3(0, 2f, 0);
+                        tmpp+=transform.position;
+                        if(Vector3.Distance(tmpp, obj.transform.position)< 2)
+                        {
+                            obj.GetComponent<EnemyStats>().damageEnemy(9f);
+                        }
+                        break;
+                }
+            }
+
+        }
+
+
+
 
         if(Input.GetKeyDown("o"))
         {
