@@ -1,11 +1,13 @@
-from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi import Depends, FastAPI, HTTPException, status, Header, Request
 from sqlalchemy.orm import Session
 import uvicorn
-from . import crud, models, schemas
+from . import crud, models, schemas, auth
 from .database import SessionLocal, engine
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy import Integer
 import bcrypt
+from .bearer import JWTBearer
+from typing import Annotated
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -16,7 +18,7 @@ def get_db():
         yield db
     finally:
         db.close()
-
+#staple72
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -35,6 +37,8 @@ async def get_current_active_user(current_user: schemas.User = Depends(get_curre
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
 
+
+
 @app.get("/users/me")
 async def read_users_me(current_user: schemas.User = Depends(get_current_active_user)):
     return current_user
@@ -49,7 +53,8 @@ def create_user(user:schemas.UserCreate, db: Session= Depends(get_db)):
     db_user = crud.get_user_by_name(db, user.username)
     if db_user:
         raise HTTPException(status_code=400, detail="Name already registered")
-    return crud.create_user(db=db, user=user)
+    db_user = crud.create_user(db=db, user=user)
+    return auth.signJWT(db_user.username)
 
 @app.get("/users/{user_id}", response_model=schemas.User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
@@ -67,7 +72,32 @@ async def login(form_data:OAuth2PasswordRequestForm = Depends(),  db: Session = 
     if not bcrypt.checkpw(form_data.password.encode('utf-8'), user.password.encode('utf-8')):
         raise HTTPException(status_code=400, detail="Incorrect username or password")
 
-    return {"access_token": user.username, "token_type": "bearer"}
+    return auth.signJWT(user.user_id)
 
+
+
+
+@app.post("/score", dependencies=[Depends(JWTBearer())], tags=["Player"])
+async def score(data: schemas.ScoreSchema, db:Session = Depends(get_db)):
+    print(data)
+    crud.update_score(data.user_id, data.score, db)
+    return status.HTTP_202_ACCEPTED
+
+
+@app.post("/follow", dependencies=[Depends(JWTBearer())], tags=["Player"])
+async def follow(data: schemas.FollowSchema, request: Request, db:Session = Depends(get_db)):
+    token = auth.token_from_request(request)
+    print(type(token))
+    stat = crud.toggle_following(token["user_id"], data.follow_id, db)
+
+    if auth.check_expiration(token["expires"]):
+        return(auth.signJWT(token["user_id"]))
+    else:
+        return(status.HTTP_200_OK)
+
+@app.get("/scores/{user_id}")
+async def scores(user_id: int = None, db:Session = Depends(get_db)):
+    crud.get_top_scores(None, db)
+    
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)

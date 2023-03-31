@@ -26,6 +26,8 @@ public class Score : MonoBehaviour
 
     public void Update()
     {
+        
+
         scoreText.text = "Score: " + scorePoint.ToString();
         
         //scorePoint += pointIncreasedPerSecond * Time.fixedDeltaTime;
