@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetKeyDown("a")) {last = "a";}
         else if(Input.GetKeyDown("s")){last = "s";}
-        else if(Input.GetKeyDown("w")){last = "a";}
+        else if(Input.GetKeyDown("w")){last = "w";}
         else if(Input.GetKeyDown("d")){last = "d";}
 
         if(Input.GetKeyDown("i"))
