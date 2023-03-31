@@ -21,8 +21,20 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnNewEnemy()
     {
-        randomSpawnZone = Random.Range(0,4);
+        
+        //randomSpawnZone = Random.Range(0,4);
 
+        randomXposition = Random.Range((float)(-8.5), (float)(7.5));
+        randomYposition = Random.Range((float)(-3.5), (float)(9));
+
+        
+        spawnPosition = new Vector3(randomXposition, randomYposition, 0f);
+        newEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
+        rend = newEnemy.GetComponent<SpriteRenderer>();
+        rend.color = new Color(Random.Range(0,2), Random.Range(0,2), Random.Range(0,2), 1f);
+
+        
+        /*
         switch(randomSpawnZone)
         {
             case 0:
@@ -42,12 +54,13 @@ public class EnemySpawner : MonoBehaviour
                 randomYposition = Random.Range(7f, 8f);
                 break;
         }
+        
 
         spawnPosition = new Vector3(randomXposition, randomYposition, 0f);
         newEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
         rend = newEnemy.GetComponent<SpriteRenderer>();
         rend.color = new Color(Random.Range(0,2), Random.Range(0,2), Random.Range(0,2), 1f);
-
+    */
     }
     // Update is called once per frame
     void Update()
