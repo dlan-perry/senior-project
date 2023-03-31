@@ -39,6 +39,16 @@ public static class PlayerPersist
     {
         return token;
     }
+
+    public static void setUser(string u)
+    {
+        user = u;
+    } 
+
+    public static void setToken(string t)
+    {
+        token = t;
+    }
 }
 
 public class MainMenu : MonoBehaviour
