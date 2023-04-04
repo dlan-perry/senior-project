@@ -32,7 +32,6 @@ class UserLogin(UserBase):
 
 
 class ScoreSchema(BaseModel):
-    user_id:int
     score: int
 
 class FollowSchema(BaseModel):
