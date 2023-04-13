@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public Sprite back;
     public Sprite left;
     public Sprite right;
+    
 
     public GameObject[] objs;
 
