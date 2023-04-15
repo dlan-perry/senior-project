@@ -15,6 +15,13 @@ public class PlayerMovement : MonoBehaviour
     public int aoe = 5;
     private string last;
 
+    public SpriteRenderer spriteRenderer;
+    public Sprite front;
+    public Sprite back;
+    public Sprite left;
+    public Sprite right;
+    
+
     public GameObject[] objs;
 
     // Start is called before the first frame update
@@ -23,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         isMoving = false;
         last = "s";
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -40,15 +48,27 @@ public class PlayerMovement : MonoBehaviour
             //Score.scorePoint += 1;
         }
 
-        if(Input.GetKeyDown("a") || Input.GetKeyDown("s") || Input.GetKeyDown("d") || Input.GetKeyDown("w"))
-        {
-            Score.scorePoint += 1;
-        }
 
-        if(Input.GetKeyDown("a")) {last = "a";}
-        else if(Input.GetKeyDown("s")){last = "s";}
-        else if(Input.GetKeyDown("w")){last = "w";}
-        else if(Input.GetKeyDown("d")){last = "d";}
+        if(Input.GetKeyDown("a")) 
+        {
+            last = "a";
+            spriteRenderer.sprite = left;
+        }
+        else if(Input.GetKeyDown("s"))
+        {
+            last = "s";
+            spriteRenderer.sprite = front;
+        }
+        else if(Input.GetKeyDown("w"))
+        {
+            last = "w";
+            spriteRenderer.sprite = back;
+        }
+        else if(Input.GetKeyDown("d"))
+        {
+            last = "d";
+            spriteRenderer.sprite = right;
+        }
 
         if(Input.GetKeyDown("i"))
         {
