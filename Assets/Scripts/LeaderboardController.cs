@@ -9,6 +9,8 @@ public class LeaderboardController : MonoBehaviour
     int MaxScores = 10;
     public TextMeshProUGUI[] GlobalScores;
     public TextMeshProUGUI[] GlobalUsers;
+    //public TextMeshProUGUI[] AddButtons;
+    public TMP_Text UserHead, ScoreHead;
     string[,] scores;
 
     // Start is called before the first frame update
@@ -51,6 +53,17 @@ public class LeaderboardController : MonoBehaviour
                 GlobalScores[i].text = "--";
             }
         }
+
+    }
+
+    public void AddUser(TextMeshProUGUI u)
+    {
+        //send player username and leaderboard username to api
+        string ThatUser = u.text; //The user being attempted to follow
+        string ThisUser = PlayerPersist.getUser(); //The user making the follow request
+
+        ScoreHead.text = ThisUser; //for testing to show the users on screen
+        UserHead.text = ThatUser;
 
     }
 
