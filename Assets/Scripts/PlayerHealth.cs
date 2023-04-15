@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {   
@@ -10,11 +11,20 @@ public class PlayerHealth : MonoBehaviour
     public float health = maxHealth;
     private Image HealthBar;
     public float period = 12f;
+    string user, token; //pull user and token from persistant variables
+    public TextMeshProUGUI DeathScore; //to show on death
+    public GameObject DeathCanvas, InGameScore;
+    public bool dead;
 
     // Start is called before the first frame update
     void Start()
     {
         HealthBar = GetComponent<Image>();
+        user = PlayerPersist.getUser();
+        token = PlayerPersist.getToken(); //populate from persiatant at start
+        DeathCanvas.SetActive(false);
+        InGameScore.SetActive(true);
+        dead = false;
     }
 
     // Update is called once per frame
@@ -34,7 +44,16 @@ public class PlayerHealth : MonoBehaviour
             // show lose screen
             // send score
             // reset score
-            SceneManager.LoadScene("Leaderboard", LoadSceneMode.Single);
+            if (!dead)
+            {
+                PlayerPersist.setScore(Score.scorePoint);
+                DeathScore.text = "Score: " + PlayerPersist.getScore().ToString();
+                DeathCanvas.SetActive(true);
+                InGameScore.SetActive(false);
+                dead = true;
+            }
+            
+            //SceneManager.LoadScene("Leaderboard", LoadSceneMode.Single);
         }
 
         period += UnityEngine.Time.deltaTime;

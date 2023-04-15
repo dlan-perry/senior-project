@@ -8,6 +8,7 @@ public static class PlayerPersist
 {
     static string user = "";
     static string token = "";
+    static int score = 0;
     //public TMP_InputField username, password;
     //public TMP_Text errorBox;
 
@@ -40,6 +41,11 @@ public static class PlayerPersist
         return token;
     }
 
+    public static int getScore()
+    {
+        return score;
+    }
+
     public static void setUser(string u)
     {
         user = u;
@@ -48,6 +54,11 @@ public static class PlayerPersist
     public static void setToken(string t)
     {
         token = t;
+    }
+
+    public static void setScore(int s)
+    {
+        score = s;
     }
 }
 
