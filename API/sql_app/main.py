@@ -44,8 +44,10 @@ async def read_users_me(current_user: schemas.User = Depends(get_current_active_
     return current_user
 
 
-@app.post("/users/", response_model=schemas.UserCreate)
+@app.post("/users/")
 def create_user(user:schemas.UserCreate, db: Session= Depends(get_db)):
+    print(user.username)
+    print(user.password)
     salt = bcrypt.gensalt()
     hashed = bcrypt.hashpw(user.password.encode('utf-8'), salt)
     user.password = hashed
@@ -54,7 +56,8 @@ def create_user(user:schemas.UserCreate, db: Session= Depends(get_db)):
     if db_user:
         raise HTTPException(status_code=400, detail="Name already registered")
     db_user = crud.create_user(db=db, user=user)
-    return auth.signJWT(db_user.username)
+    print("finished method")
+    return db_user.user_id
 
 @app.get("/users/{user_id}", response_model=schemas.User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
@@ -77,10 +80,11 @@ async def login(form_data:OAuth2PasswordRequestForm = Depends(),  db: Session = 
 
 
 
-@app.post("/score", dependencies=[Depends(JWTBearer())], tags=["Player"])
-async def score(data: schemas.ScoreSchema, db:Session = Depends(get_db)):
+@app.get("/score", dependencies=[Depends(JWTBearer())], tags=["Player"])
+async def score(data: schemas.ScoreSchema,request: Request, db:Session = Depends(get_db)):
     print(data)
-    crud.update_score(data.user_id, data.score, db)
+    token = auth.token_from_request(request)
+    crud.update_score(token["user_id"], data.score, db)
     return status.HTTP_202_ACCEPTED
 
 
@@ -95,9 +99,15 @@ async def follow(data: schemas.FollowSchema, request: Request, db:Session = Depe
     else:
         return(status.HTTP_200_OK)
 
+
+
+@app.get("/scores/")
+async def top_score(db:Session = Depends(get_db)):
+    return crud.get_top_scores(None, db)
+
 @app.get("/scores/{user_id}")
 async def scores(user_id: int = None, db:Session = Depends(get_db)):
-    crud.get_top_scores(None, db)
+    return crud.get_top_scores(user_id, db)
     
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
