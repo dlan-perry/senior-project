@@ -1308,6 +1308,17 @@ MonoBehaviour:
   - {fileID: 1885769286}
   - {fileID: 1706075808}
   - {fileID: 1659087175}
+  FriendScores:
+  - {fileID: 1533318803}
+  - {fileID: 2092562279}
+  - {fileID: 1328982193}
+  - {fileID: 1045138162}
+  - {fileID: 1780067449}
+  - {fileID: 1164888664}
+  - {fileID: 1527075137}
+  - {fileID: 522806763}
+  - {fileID: 1617557036}
+  - {fileID: 1322915326}
   GlobalUsers:
   - {fileID: 1364316568}
   - {fileID: 90410792}
@@ -1319,6 +1330,17 @@ MonoBehaviour:
   - {fileID: 1504163276}
   - {fileID: 1819813723}
   - {fileID: 141018632}
+  FriendUsers:
+  - {fileID: 522598252}
+  - {fileID: 449165295}
+  - {fileID: 1355941812}
+  - {fileID: 1809427518}
+  - {fileID: 2018485548}
+  - {fileID: 1231054772}
+  - {fileID: 599989877}
+  - {fileID: 1545204622}
+  - {fileID: 997285347}
+  - {fileID: 606723087}
   UserHead: {fileID: 1373342868}
   ScoreHead: {fileID: 792228359}
 --- !u!4 &257646209
@@ -3440,7 +3462,7 @@ MonoBehaviour:
         m_MethodName: AddUser
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1504163276}
+          m_ObjectArgument: {fileID: 1545204622}
           m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -4338,7 +4360,7 @@ RectTransform:
   m_Children:
   - {fileID: 1463336045}
   m_Father: {fileID: 2031599597}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4394,7 +4416,7 @@ MonoBehaviour:
         m_MethodName: AddUser
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2012598593}
+          m_ObjectArgument: {fileID: 1231054772}
           m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -4662,7 +4684,7 @@ MonoBehaviour:
         m_MethodName: AddUser
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1548140986}
+          m_ObjectArgument: {fileID: 1355941812}
           m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -5740,7 +5762,7 @@ MonoBehaviour:
         m_MethodName: AddUser
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1819813723}
+          m_ObjectArgument: {fileID: 997285347}
           m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -6143,7 +6165,7 @@ MonoBehaviour:
         m_MethodName: AddUser
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1364316568}
+          m_ObjectArgument: {fileID: 522598252}
           m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -8092,7 +8114,7 @@ MonoBehaviour:
         m_MethodName: AddUser
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1511678585}
+          m_ObjectArgument: {fileID: 2018485548}
           m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -8496,7 +8518,7 @@ MonoBehaviour:
         m_MethodName: AddUser
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 90410792}
+          m_ObjectArgument: {fileID: 449165295}
           m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -11009,7 +11031,7 @@ MonoBehaviour:
         m_MethodName: AddUser
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1056408861}
+          m_ObjectArgument: {fileID: 1809427518}
           m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -12706,7 +12728,7 @@ RectTransform:
   m_Children:
   - {fileID: 72248688}
   m_Father: {fileID: 2031599597}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12762,7 +12784,7 @@ MonoBehaviour:
         m_MethodName: AddUser
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1100245247}
+          m_ObjectArgument: {fileID: 599989877}
           m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -14066,8 +14088,8 @@ RectTransform:
   - {fileID: 957780218}
   - {fileID: 1629823348}
   - {fileID: 1276283891}
-  - {fileID: 1843850043}
   - {fileID: 919645131}
+  - {fileID: 1843850043}
   - {fileID: 624529164}
   - {fileID: 1022082134}
   - {fileID: 2072111130}
@@ -14206,7 +14228,7 @@ MonoBehaviour:
         m_MethodName: AddUser
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 141018632}
+          m_ObjectArgument: {fileID: 606723087}
           m_ObjectArgumentAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
