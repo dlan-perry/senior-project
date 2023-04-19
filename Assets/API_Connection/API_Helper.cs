@@ -4,8 +4,38 @@ using UnityEngine.Networking;
 using UnityEngine;
 using System.Net;
 using System.IO;
+using System.Text;
+
+
 public static class API_Helper
 {
+
+    public static string token = "";
+
+
+
+    public static void followUser(int user_id, int follow_id)
+    {
+        string data = "{ \"user_id\": " + user_id + ",\"follow_id\": " + follow_id + " }";
+        var request = new UnityWebRequest("http://127.0.0.1:8000/follow", "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.SendWebRequest();
+
+
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(request.error);
+        }
+        else
+        {
+            Debug.Log("Form upload complete!");
+        }
+    }
+
 
     public static User GetUser(int user_id)
     {
@@ -24,15 +54,19 @@ public static class API_Helper
 
     public static void registerUser(string username, string password)
     {
-        List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-        formData.Add(new MultipartFormDataSection("username=" + username + "&password=" + password + "&salt=none"));
-        UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8000/users/", formData);
-        www.SendWebRequest();
+
+        string data = "{\"username\": \"" + username + "\",\"password\":\"" + password + "\",\"salt\": \"\"}";
+        var request = new UnityWebRequest("http://127.0.0.1:8000/users/", "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.SendWebRequest();
 
 
-        if (www.result != UnityWebRequest.Result.Success)
+        if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.Log(www.error);
+            Debug.Log("BAAAAD");
         }
         else
         {
@@ -41,54 +75,30 @@ public static class API_Helper
     }
 
     //put 0 if you want just the top 10, or the user_id if you would like the top 10 of the following list
-    public static List<string> getLeaderboard(int user_id) {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:8000/scores/" + user_id.ToString());
+    public static Leaderboard getLeaderboard(int user_id)
+    {
+        HttpWebRequest request = null;
+        if (user_id != 0)
+        {
+            request = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:8000/scores/" + user_id.ToString());
+        }
+        else
+        {
+            request = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:8000/scores/");
+
+        }
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
         StreamReader reader = new StreamReader(response.GetResponseStream());
 
         string json = reader.ReadToEnd();
-
-
-        return JsonUtility.FromJson<List<string>>(json);
+        Debug.Log(json);
+        return JsonUtility.FromJson<Leaderboard>(json);
     }
 
-    public static string login(string username, string password) {
-
-
-        Hashtable param = new Hashtable();
-        param.Add("username", username);
-        param.Add("password", password);
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:8000/token/");
-
-        string json = JsonUtility.ToJson(param);
-
-        byte[] postBytes = System.Text.Encoding.UTF8.GetBytes(json);
-
-
-        request.Method = "POST";
-        request.ContentType = "application/json; charset=UTF-8";
-        request.Accept = "application/json";
-        request.ContentLength = postBytes.Length;
-
-
-        Stream requestStream = request.GetRequestStream();
-
-
-        requestStream.Write(postBytes, 0, postBytes.Length);
-        requestStream.Close();
-
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        string result;
-
-
-        StreamReader reader = new StreamReader(response.GetResponseStream());
-
-        string response_json = reader.ReadToEnd();
-
-
-        return JsonUtility.FromJson<string>(response_json);
-
+    public static string login(string username, string password)
+    {
+        return "bruh";
     }
 
 
@@ -110,8 +120,33 @@ public static class API_Helper
         else
         {
             Debug.Log("Form upload complete!");
-            return "token"; 
+            return "token";
+        }
+    }
+
+
+    public static IEnumerator postRequest(string username, string password)
+    {
+        Debug.Log("called this method");
+        WWWForm form = new WWWForm();
+        form.AddField("username", username);
+        form.AddField("password", password);
+
+        UnityWebRequest uwr = UnityWebRequest.Post("http://127.0.0.1:8000/token", form);
+
+        //Send the request then wait here until it returns
+        yield return uwr.SendWebRequest();
+
+        if (uwr.isNetworkError)
+        {
+            Debug.Log("Error While Sending: " + uwr.error);
+        }
+        else
+        {
+            Debug.Log("Received: " + uwr.downloadHandler.text);
+            
         }
     }
 }
+
 
