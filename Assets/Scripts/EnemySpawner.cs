@@ -12,24 +12,17 @@ public class EnemySpawner : MonoBehaviour
     private int randomSpawnZone;
     private float randomXposition, randomYposition;
     private Vector3 spawnPosition;
-    private GameObject player;
-    private float randomized;
 
     // Start is called before the first frame update
     void Start()
     {
-        randomized = Random.Range((float)(1), (float)(10));
-        InvokeRepeating("SpawnNewEnemy", 6f, randomized);
-        
+        InvokeRepeating("SpawnNewEnemy", 0f, 7f);
     }
 
     private void SpawnNewEnemy()
     {
-        player = GameObject.FindGameObjectWithTag("player");
-        float playerX = player.transform.position.x;
-        float playerY = player.transform.position.y;
-        randomXposition = playerX + Random.Range((float)(-5), (float)(5));
-        randomYposition = playerY + Random.Range((float)(-5), (float)(5));
+        randomXposition = Random.Range((float)(-8.5), (float)(7.5));
+        randomYposition = Random.Range((float)(-3.5), (float)(9));
         
         spawnPosition = new Vector3(randomXposition, randomYposition, 0f);
         newEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
