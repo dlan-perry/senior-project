@@ -29,6 +29,7 @@ public class EnemyStats : MonoBehaviour
 
     if(health <= 0)
     {
+        Score.scorePoint += 1;
         Destroy(gameObject);
     }
 
