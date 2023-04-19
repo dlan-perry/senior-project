@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import desc
 from . import models, schemas, database
 from datetime import date
 from fastapi import HTTPException, status
@@ -58,45 +57,19 @@ def toggle_following(user_id: int, user_following: int, db: Session):
 def get_top_scores(user_id: Optional[int], db: Session):
     top_ten = []
     if user_id:
-        db_user= db.query(models.User).filter(models.User.user_id==user_id).first()
+        db_user= db.query(models.User.following).filter(models.User.user_id==user_id).order_by(models.User.high_score.desc()).limit(10)
+        for user in db_user:
+            print([user, user.username, user.user_id])
+            top_ten.append([user.username, user.high_score])
 
-        for user in db_user.following:
-            collect(user.username, user.high_score, user.user_id, top_ten)
     else:
-        results = db.query(models.User).order_by(desc(models.User.high_score)).limit(10)
+        results = db.query(models.User).order_by(models.User.high_score).limit(10)
         for result in results:
             print([result, result.username, result.user_id])
-            top_ten.append([result.username, result.user_id, result.high_score])
-    return {"scores" :format_leaderboard(top_ten)}
+            top_ten.append([result, result.username, result.user_id])
+        
+    return top_ten
 
-
-def format_leaderboard(collection):
-    collection = sorted(collection, key=lambda x: x[2], reverse=True)   
-    fmt = []
-    for x in collection:
-        tmp = {"username" : x[0], "user_id" : x[1], "high_score": x[2]}
-        fmt.append(tmp)
-    return fmt
-
-def collect(name, value,user_id, collection):
-    if len(collection) >= 10:
-        numMin = None
-        numReplace = None
-        SCORE = 1
-        NAME = 0
-        ID = 2
-        for count, x in collection:
-            if not numMin:
-                numMin = x[SCORE]
-                numReplace = count
-            else:
-                if x[SCORE] < numMin:
-                    numMin = x[SCORE]
-                    numReplace = count
-        collection.pop(numReplace)
-        collection.append([name, value, user_id])
-    else:
-        collection.append([name, value, user_id])
-
+        
 
 
