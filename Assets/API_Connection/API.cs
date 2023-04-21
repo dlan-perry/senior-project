@@ -121,12 +121,17 @@ public class API : MonoBehaviour
         return JsonUtility.FromJson<Leaderboard>(json);
     }
 
-    public static string score(int score)
+    public static void score(int score)
     {
-        string json = "{ score: " + score + " }";
-        UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8000/score", json);
-        www.SetRequestHeader("Authorization", "Bearer: " + API.bearer.access_token);
+
+        string json = "{ \"score\": " + score + " }";
+        UnityWebRequest www = UnityWebRequest.Get("http://127.0.0.1:8000/score");
+        
         www.SetRequestHeader("Content-Type", "application/json");
+        www.SetRequestHeader("Authorization", "Bearer " + API.bearer.access_token);
+        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
+        www.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+
 
         www.SendWebRequest();
 
@@ -134,12 +139,11 @@ public class API : MonoBehaviour
         if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.Log(www.error);
-            return null;
+            Debug.Log("Score Error");
         }
         else
         {
             Debug.Log("Form upload complete!");
-            return "token";
         }
     }
 

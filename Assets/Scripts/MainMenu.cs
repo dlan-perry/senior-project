@@ -66,6 +66,7 @@ public static class PlayerPersist
 
     public static void setScore(int s)
     {
+        API.score(s);
         score = s;
     }
 
@@ -92,7 +93,10 @@ public class MainMenu : MonoBehaviour
         //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single); //don't do this
         user = PlayerPersist.getUser();
         token = PlayerPersist.getToken();
-        userBox.text = user;
+        if (userBox != null)
+        {
+            userBox.text = user;
+        }
     }
 
     public void Login()

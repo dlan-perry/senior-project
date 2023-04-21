@@ -55,19 +55,17 @@ public class LeaderboardController : MonoBehaviour
         GetLBScores(); // get scores before displaying
         
         //display scores onto TMP elements
-        for (int i = 0; i < scores1.GetLength(0); i++)
+        for (int i = 0; i < GlobalUsers.GetLength(0) && i < scores1.GetLength(0); i++)
         {
             GlobalUsers[i].text = scores1[i, 0];
             GlobalScores[i].text = scores1[i, 1];
 
-            FriendUsers[i].text = scores2[i, 0];
-            FriendScores[i].text = scores2[i, 1];
         }
 
         //GlobalScores[0].SetText(scores.GetLength(0).ToString());
         //GlobalUsers[0].text = scores[0, 0];
         //GlobalScores[0].text = scores[0, 1];
-
+        /*
         if (scores1.GetLength(0) < MaxScores)
         {
             for (int i = scores1.GetLength(0); i < MaxScores; i++)
@@ -76,7 +74,7 @@ public class LeaderboardController : MonoBehaviour
                 GlobalScores[i].text = "--";
             }
         }
-
+        */
     }
 
     public void AddUser(TextMeshProUGUI u)
