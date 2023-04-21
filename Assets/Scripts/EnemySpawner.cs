@@ -27,13 +27,13 @@ public class EnemySpawner : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("player");
         float playerX = player.transform.position.x;
         float playerY = player.transform.position.y;
-        randomXposition = playerX + Random.Range((float)(-5), (float)(5));
-        randomYposition = playerY + Random.Range((float)(-5), (float)(5));
-        
+        int[] distanceOptions = new [] {-6, -5, -4, -3, -2, 2, 3, 4, 5, 6};
+        randomXposition = playerX + distanceOptions[Random.Range(0, distanceOptions.Length - 1)];
+        randomYposition = playerY + distanceOptions[Random.Range(0, distanceOptions.Length - 1)]; 
         spawnPosition = new Vector3(randomXposition, randomYposition, 0f);
         newEnemy = Instantiate(enemy, spawnPosition, Quaternion.identity);
-        rend = newEnemy.GetComponent<SpriteRenderer>();
-        rend.color = new Color(Random.Range(0,2), Random.Range(0,2), Random.Range(0,2), 1f);
+        //rend = newEnemy.GetComponent<SpriteRenderer>();
+        //rend.color = new Color(Random.Range(0,2), Random.Range(0,2), Random.Range(0,2), 1f);
 
     }
     // Update is called once per frame
