@@ -9,6 +9,8 @@ public static class PlayerPersist
     static string user = "";
     static string token = "";
     static int score = 0;
+    static int user_id = 0;
+    
     //public TMP_InputField username, password;
     //public TMP_Text errorBox;
 
@@ -22,7 +24,7 @@ public static class PlayerPersist
         }
         else
         {
-            user = u;
+            Debug.Log("calling the login function");
             
             return "Success";
         }
@@ -33,7 +35,13 @@ public static class PlayerPersist
 
     public static string getUser()
     {
-        return user;
+        if (user != null){
+            return user;
+        }
+        else
+        {
+            return "NULL";
+        }
     }
 
     public static string getToken()
@@ -60,6 +68,11 @@ public static class PlayerPersist
     {
         score = s;
     }
+
+    public static void setData(User u) {
+        PlayerPersist.user = u.username;
+        PlayerPersist.user_id = u.user_id;
+    }
 }
 
 public class MainMenu : MonoBehaviour
@@ -69,9 +82,11 @@ public class MainMenu : MonoBehaviour
     //public string userString = "-_-";
     public TMP_Text errorBox, userBox;
     string user, token;
+    API api;
 
     void Start()
     {
+        api = new API();
         Time.timeScale = 1;
         //LeaderboardtoMainMenu(); //testing
         //SceneManager.LoadScene("MainMenu", LoadSceneMode.Single); //don't do this
@@ -82,17 +97,34 @@ public class MainMenu : MonoBehaviour
 
     public void Login()
     {
-        string response;
-        response = PlayerPersist.LoginAttempt(username.text, password.text);
+        Debug.Log("called the login");
 
-        if (response == "Success")
+        string response;
+        //response = PlayerPersist.LoginAttempt(username.text, password.text);
+        StartCoroutine(api.postRequest(username.text, password.text));
+        Debug.Log("called the login");
+        StartCoroutine(waitForResponse());
+        if (API.bearer != null)
         {
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+            User u = API.getUserByToken(PlayerPersist.getToken());
+            PlayerPersist.setData(u);
+            Debug.Log("From userdata, the user's  name is " + u.username);
+
+            Debug.Log("The user's  name is " + PlayerPersist.getUser());
+            userBox.text = "TESTTESTTEST";
         }
         else
         {
-            errorBox.text = response;
+            errorBox.text = "Error when logging in";
         }
+    }
+
+    IEnumerator waitForResponse()
+    {
+        Debug.Log("Waiting for bearer token to be received");
+        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(10f);
     }
 
     public void PlayGame()

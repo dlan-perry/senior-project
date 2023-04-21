@@ -6,36 +6,44 @@ using System.Net;
 using System.IO;
 using System.Text;
 
-
-public static class API_Helper
+public class API : MonoBehaviour
 {
 
-    public static string token = "";
+    public static Bearer bearer;
+    public bool isLoaded = false;
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log("API Test Start");
+
+        getLeaderboard(2);
+    }
 
 
-
-    public static void followUser(int user_id, int follow_id)
+    public static bool followUser(int user_id, int follow_id)
     {
         string data = "{ \"user_id\": " + user_id + ",\"follow_id\": " + follow_id + " }";
-        var request = new UnityWebRequest("http://127.0.0.1:8000/follow", "POST");
+        UnityWebRequest request = new UnityWebRequest("http://127.0.0.1:8000/follow", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(data);
+        request.SetRequestHeader("Content-Type", "application/json");
+        Debug.Log(API.bearer.access_token);
+        request.SetRequestHeader("Authorization", "Bearer " + API.bearer.access_token);
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-        request.SetRequestHeader("Content-Type", "application/json");
+
         request.SendWebRequest();
 
 
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.Log(request.error);
+            return false;
         }
         else
         {
-            Debug.Log("Form upload complete!");
+            return true;
         }
     }
-
 
     public static User GetUser(int user_id)
     {
@@ -52,7 +60,25 @@ public static class API_Helper
 
     }
 
-    public static void registerUser(string username, string password)
+    public static User getUserByToken(string token)
+    {
+
+
+
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:8000/user/me");
+        request.Headers.Add("Authorization", "Bearer " + API.bearer.access_token);
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+
+        string json = reader.ReadToEnd();
+
+        Debug.Log("JSON IS ->" + json);
+        return JsonUtility.FromJson<User>(json);
+    }
+
+
+    public static bool registerUser(string username, string password)
     {
 
         string data = "{\"username\": \"" + username + "\",\"password\":\"" + password + "\",\"salt\": \"\"}";
@@ -66,15 +92,14 @@ public static class API_Helper
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.Log("BAAAAD");
+            return false;
         }
         else
         {
-            Debug.Log("Form upload complete!");
+            return true;
         }
     }
 
-    //put 0 if you want just the top 10, or the user_id if you would like the top 10 of the following list
     public static Leaderboard getLeaderboard(int user_id)
     {
         HttpWebRequest request = null;
@@ -96,17 +121,11 @@ public static class API_Helper
         return JsonUtility.FromJson<Leaderboard>(json);
     }
 
-    public static string login(string username, string password)
-    {
-        return "bruh";
-    }
-
-
-    public static string score(int score, string token)
+    public static string score(int score)
     {
         string json = "{ score: " + score + " }";
         UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1:8000/score", json);
-        www.SetRequestHeader("Authorization", "Bearer: " + token);
+        www.SetRequestHeader("Authorization", "Bearer: " + API.bearer.access_token);
         www.SetRequestHeader("Content-Type", "application/json");
 
         www.SendWebRequest();
@@ -124,8 +143,18 @@ public static class API_Helper
         }
     }
 
+    public void login(string username, string password)
+    {
+        Debug.Log("getting the request");
+        StartCoroutine(postRequest(username, password));
+    }
 
-    public static IEnumerator postRequest(string username, string password)
+    private IEnumerator WaitingForJson()
+    {
+            yield return new WaitForSeconds(10000f);
+    }
+
+    public IEnumerator postRequest(string username, string password)
     {
         Debug.Log("called this method");
         WWWForm form = new WWWForm();
@@ -144,9 +173,19 @@ public static class API_Helper
         else
         {
             Debug.Log("Received: " + uwr.downloadHandler.text);
+            API.bearer = JsonUtility.FromJson<Bearer>(uwr.downloadHandler.text);
+            PlayerPersist.setToken(API.bearer.access_token);
+            isLoaded = true;
             
         }
     }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown("b")){
+            API.followUser(2, 3);
+        }
+    }
 }
-
-

@@ -23,14 +23,26 @@ public class LeaderboardController : MonoBehaviour
 
     public void GetLBScores()
     {
+        Debug.Log("Getting Scores");
         //populate scores1 for global, scores2 for friends
-
+        UserScore[] global = API.getLeaderboard(0).scores;
+        UserScore[] local = API.getLeaderboard(2).scores;
         //use to populate array
-        scores1 = new string[,] {{ "Player 1" , "15"},
-                                { "Player 2" , "4"},
-                                { "Player 3" , "12333333"},
-                                { "Player 4" , "9000"}};
 
+        scores1 = new string[global.GetLength(0),2];
+        for (int i = 0; i < global.GetLength(0); i++) {
+            scores1[i, 0] = global[i].user_id.ToString() + ":" + global[i].username;
+            scores1[i, 1] = global[i].high_score.ToString() ;
+        }
+
+        /*
+        scores2 = new string[local.GetLength(0), 2];
+        for (int i = 0; i < local.GetLength(0); i++)
+        {
+            scores2[i, 0] = local[i].user_id.ToString() + ":" + local[i].username;
+            scores2[i, 1] = local[i].high_score.ToString();
+        }
+        */
         scores2 = new string[,] {{ "Player 11" , "1234235"},
                                 { "Player 21" , "4234234"},
                                 { "Player 311" , "12332543"},
@@ -39,6 +51,7 @@ public class LeaderboardController : MonoBehaviour
 
     public void ShowScores()
     {
+        Debug.Log("Called Show Scores");
         GetLBScores(); // get scores before displaying
         
         //display scores onto TMP elements
@@ -75,7 +88,7 @@ public class LeaderboardController : MonoBehaviour
         //ScoreHead.text = ThisUser; //for testing to show the users on screen
         //UserHead.text = ThatUser;
         Debug.Log("Current User: " + ThisUser);
-        Debug.Log("User to Add: " + ThatUser);
+        Debug.Log("User to Add: " + ThatUser.Split(":")[1] + " with user_id of " + ThatUser.Split(":")[0]);
 
 
         /*
