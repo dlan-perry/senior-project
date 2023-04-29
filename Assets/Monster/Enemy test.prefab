@@ -113,7 +113,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6, y: 6}
+  m_Size: {x: 2.8, y: 2.8}
   m_EdgeRadius: 0
 --- !u!114 &7225827090809746346
 MonoBehaviour:
@@ -130,9 +130,18 @@ MonoBehaviour:
   speed: 0.25
   stopDistance: 1.04
   spriteRenderer: {fileID: 7225827090809746351}
-  apple_front: {fileID: 21300000, guid: 37175860eb3b2e3498e92c6aa0620fdc, type: 3}
-  pineapple_front: {fileID: 21300000, guid: fb5268ea7dc1c82488137f0fe6175a67, type: 3}
-  orange_front: {fileID: 21300000, guid: e37d07a2b9d7ca848a8cbe1d4a67b291, type: 3}
+  apple_front: {fileID: 21300000, guid: 50366023b9d87974dbcb864713799c2b, type: 3}
+  apple_back: {fileID: 21300000, guid: 8664ff93220f99a41831fb85eb34f108, type: 3}
+  apple_left: {fileID: 21300000, guid: 5683e50624a6e18489dd801b5e3e0f9f, type: 3}
+  apple_right: {fileID: 21300000, guid: 36f9c5307a8f7ee4d9448735ff3b9ffe, type: 3}
+  pineapple_front: {fileID: 21300000, guid: 685ae2921cf739f40a4977c2a648b035, type: 3}
+  pineapple_back: {fileID: 21300000, guid: b18ce5fed3164c74889fa022c8a5b08e, type: 3}
+  pineapple_left: {fileID: 21300000, guid: b5e6d9d9820f5f040ad31583218fb2b4, type: 3}
+  pineapple_right: {fileID: 21300000, guid: 807a961478d66b74097a043607ed7707, type: 3}
+  orange_front: {fileID: 21300000, guid: 7024ca83b43b1244988095e4b85a06b5, type: 3}
+  orange_back: {fileID: 21300000, guid: 5a6f1bf70840aec418f7e5c3b21e8384, type: 3}
+  orange_left: {fileID: 21300000, guid: 455b0828b05189d4fa2f693775f38a24, type: 3}
+  orange_right: {fileID: 21300000, guid: a6e9b67f3104ae64f98da7d4aa37e202, type: 3}
 --- !u!50 &7225827090809746349
 Rigidbody2D:
   serializedVersion: 4

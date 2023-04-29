@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MoveToPlayer : MonoBehaviour
 {
@@ -14,26 +15,26 @@ public class MoveToPlayer : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     public Sprite apple_front;
-    //public Sprite apple_back;
-    //public Sprite apple_left;
-    //public Sprite apple_right;
+    public Sprite apple_back;
+    public Sprite apple_left;
+    public Sprite apple_right;
 
     public Sprite pineapple_front;
-    //public Sprite pineapple_back;
-    //public Sprite pineapple_left;
-    //public Sprite pineapple_right;
+    public Sprite pineapple_back;
+    public Sprite pineapple_left;
+    public Sprite pineapple_right;
 
     public Sprite orange_front;
-    //public Sprite orange_back;
-    //public Sprite orange_left;
-    //public Sprite orange_right;
+    public Sprite orange_back;
+    public Sprite orange_left;
+    public Sprite orange_right;
 
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("player");
-        enemyType = enemies[Random.Range(0, 3)];
+        enemyType = enemies[UnityEngine.Random.Range(0, 3)];
         switch(enemyType)
         {
             case "pineapple":
@@ -58,8 +59,8 @@ public class MoveToPlayer : MonoBehaviour
 
         if(Vector2.Distance(transform.position, player.transform.position) <= stopDistance) return;
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-        /*
-        if(y_away <= 0.0f)
+        
+        if(y_away <= 0.0f && Math.Abs(x_away) <= Math.Abs(y_away))
         {
             switch(enemyType)
             {
@@ -77,7 +78,7 @@ public class MoveToPlayer : MonoBehaviour
             }
         }
 
-        if(y_away > 0.0f)
+        if(y_away > 0.0f && Math.Abs(x_away) <= Math.Abs(y_away))
         {
             switch(enemyType)
             {
@@ -95,7 +96,7 @@ public class MoveToPlayer : MonoBehaviour
             }
         }
 
-        if(x_away <= 0.0f)
+        if(x_away <= 0.0f && Math.Abs(y_away) <= Math.Abs(x_away) )
         {
             switch(enemyType)
             {
@@ -113,7 +114,7 @@ public class MoveToPlayer : MonoBehaviour
             }
         }
 
-        if(x_away > 0.0f)
+        if(x_away > 0.0f && Math.Abs(y_away) <= Math.Abs(x_away))
         {
             switch(enemyType)
             {
@@ -129,7 +130,7 @@ public class MoveToPlayer : MonoBehaviour
             default:
                 break;
             }
-        }*/
+        }
 
     }
 }
