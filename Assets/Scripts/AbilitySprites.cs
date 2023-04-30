@@ -9,10 +9,16 @@ public class AbilitySprites : MonoBehaviour
     private GameObject player;
     public Sprite aoe;
     public Sprite heal;
-    public Sprite directional;
+    public Sprite directionalup;
+    public Sprite directionaldown;
+    public Sprite directionalleft;
+    public Sprite directionalright;
     public float done = 0.0f;
     public float current = 0.0f;
     private string last;
+    public float periodaoe = 6f;
+    public float perioddir = 2f;
+    public float periodheal = 12f;
 
     public SpriteRenderer spriteRenderer;
 
@@ -33,21 +39,23 @@ public class AbilitySprites : MonoBehaviour
         if(Input.GetKeyDown("s")) {last = "s";}
         if(Input.GetKeyDown("d")) {last = "d";}
 
-        if(Input.GetKeyDown("o"))
+        if(Input.GetKeyDown("o")&& periodaoe > 6)
         {
             current = done;
             transform.position = player.transform.position;
             spriteRenderer.sprite = aoe;
+            periodaoe = 0;
         }
 
-        if(Input.GetKeyDown("p"))
+        if(Input.GetKeyDown("p")&& periodheal > 12)
         {
             current = done;
             transform.position = player.transform.position;
             spriteRenderer.sprite = heal;
+            periodheal = 0;
         }
 
-        if(Input.GetKeyDown("i"))
+        if(Input.GetKeyDown("i")&& perioddir > 2)
         {
             Vector3 tmp = player.transform.position;
             current = done;
@@ -55,31 +63,27 @@ public class AbilitySprites : MonoBehaviour
                 case "w":
                     tmp.y += 1f;
                     transform.position = tmp;
-                    //transform.position.x = player.transform.position.x;
-                    //transform.position.y = player.transform.position.y + 1;
+                    spriteRenderer.sprite = directionalup;
                     break;
                 case "a":
                     tmp.x -= 1f;
                     transform.position = tmp;
-                    //transform.position.x = player.transform.position.x - 1;
-                    //transform.position.y = player.transform.position.y;
+                    spriteRenderer.sprite = directionalleft;
                     break;
                 case "s":
                     tmp.y -= 1f;
                     transform.position = tmp;
-                    //transform.position.x = player.transform.position.x - 1;
-                    //transform.position.y = player.transform.position.y;
+                    spriteRenderer.sprite = directionaldown;
                     break;
                 case "d":
                     tmp.x += 1f;
                     transform.position = tmp;
-                    //transform.position.x = player.transform.position.x;
-                    //transform.position.y = player.transform.position.y - 1;
+                    spriteRenderer.sprite = directionalright;
                     break;
                 default:
                     break;
             }
-            spriteRenderer.sprite = directional;
+            perioddir = 0;
         }
 
         if(current+.12 <= done)
@@ -88,6 +92,9 @@ public class AbilitySprites : MonoBehaviour
         } 
 
         done += UnityEngine.Time.deltaTime;
+        periodaoe += UnityEngine.Time.deltaTime;
+        perioddir += UnityEngine.Time.deltaTime;
+        periodheal += UnityEngine.Time.deltaTime;
 
     }
 

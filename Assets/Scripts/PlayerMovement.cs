@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private float xInput, yInput;
     public int speed = 10;
     private bool isMoving;
-    public float period = 20f;
+    public float periodaoe = 6f;
+    public float perioddir = 2f;
     public int aoe = 5;
     private string last;
 
@@ -73,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         else if(Input.GetKeyDown("w")){last = "w";}
         else if(Input.GetKeyDown("d")){last = "d";}
 
-        if(Input.GetKeyDown("i"))
+        if(Input.GetKeyDown("i") && perioddir > 2)
         {
             objs = GameObject.FindGameObjectsWithTag("enemy");
             foreach(GameObject obj in objs)
@@ -115,13 +116,14 @@ public class PlayerMovement : MonoBehaviour
                         break;
                 }
             }
+            perioddir = 0;
 
         }
 
 
 
 
-        if(Input.GetKeyDown("o"))
+        if(Input.GetKeyDown("o")&& periodaoe > 6)
         {
             objs = GameObject.FindGameObjectsWithTag("enemy");
             foreach(GameObject obj in objs)
@@ -133,10 +135,12 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-            period = 0;
+            periodaoe = 0;
         }
-        period += UnityEngine.Time.deltaTime;
+        periodaoe += UnityEngine.Time.deltaTime;
+        perioddir += UnityEngine.Time.deltaTime;
 
     }
+
 
 }

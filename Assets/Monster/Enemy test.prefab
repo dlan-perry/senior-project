@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.25
-  stopDistance: 1.04
+  stopDistance: 0.3
   spriteRenderer: {fileID: 7225827090809746351}
   apple_front: {fileID: 21300000, guid: 50366023b9d87974dbcb864713799c2b, type: 3}
   apple_back: {fileID: 21300000, guid: 8664ff93220f99a41831fb85eb34f108, type: 3}

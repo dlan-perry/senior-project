@@ -1658,11 +1658,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd2e1b80c7c18348b0d0d9a9ca01cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aoe: {fileID: 21300000, guid: 9ee5c146420bb8c459b3b4de0f3a3574, type: 3}
+  aoe: {fileID: 21300000, guid: 75ba3afcdbb074348bc51b1c4f0692e8, type: 3}
   heal: {fileID: 21300000, guid: 58f0f8551eea71740a8d72187dc88184, type: 3}
-  directional: {fileID: 21300000, guid: 9e9d472e3beeb954d9a1a3c47fcfc98b, type: 3}
+  directionalup: {fileID: 21300000, guid: fd22efc68b2ce9a4c8f3635af3d9f40e, type: 3}
+  directionaldown: {fileID: 21300000, guid: b7095ec30c6c78c47870eed4ec0f3642, type: 3}
+  directionalleft: {fileID: 21300000, guid: 899815715bb58fc43927a656bb4f4239, type: 3}
+  directionalright: {fileID: 21300000, guid: b041e698af009ad4985eb25cdf3b8534, type: 3}
   done: 0
   current: 0
+  periodaoe: 6
+  perioddir: 2
+  periodheal: 12
   spriteRenderer: {fileID: 1517271747}
 --- !u!4 &1517271749
 Transform:
@@ -2721,6 +2727,10 @@ PrefabInstance:
       value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 6357105516084888490, guid: 48d737ad5c4f5d240b32751e234b074f, type: 3}
+      propertyPath: aoe
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6357105516084888490, guid: 48d737ad5c4f5d240b32751e234b074f, type: 3}
       propertyPath: back
       value: 
       objectReference: {fileID: 21300000, guid: 2c20c28cc1d87694198bf795816a3b45, type: 3}
@@ -2860,7 +2870,7 @@ PrefabInstance:
       objectReference: {fileID: 147460160}
     - target: {fileID: 7225827090809746346, guid: 8f43fe201de661d4b9aafb77f5adc754, type: 3}
       propertyPath: stopDistance
-      value: 1.04
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7225827090809746348, guid: 8f43fe201de661d4b9aafb77f5adc754, type: 3}
       propertyPath: m_Name
