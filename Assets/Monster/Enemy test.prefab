@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7225827090809746344}
   - component: {fileID: 7225827090809746351}
   - component: {fileID: 7225827090809746350}
+  - component: {fileID: 7225827090809746346}
   - component: {fileID: 7225827090809746349}
   - component: {fileID: 7225827090809746345}
-  - component: {fileID: 7225827090809746346}
   - component: {fileID: -6046096759486156200}
   m_Layer: 0
   m_Name: Enemy test
@@ -113,8 +113,35 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6, y: 6}
+  m_Size: {x: 2.8, y: 2.8}
   m_EdgeRadius: 0
+--- !u!114 &7225827090809746346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7225827090809746348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9035e996cccc0447b2eba3289e87f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.25
+  stopDistance: 0.3
+  spriteRenderer: {fileID: 7225827090809746351}
+  apple_front: {fileID: 21300000, guid: 50366023b9d87974dbcb864713799c2b, type: 3}
+  apple_back: {fileID: 21300000, guid: 8664ff93220f99a41831fb85eb34f108, type: 3}
+  apple_left: {fileID: 21300000, guid: 5683e50624a6e18489dd801b5e3e0f9f, type: 3}
+  apple_right: {fileID: 21300000, guid: 36f9c5307a8f7ee4d9448735ff3b9ffe, type: 3}
+  pineapple_front: {fileID: 21300000, guid: 685ae2921cf739f40a4977c2a648b035, type: 3}
+  pineapple_back: {fileID: 21300000, guid: b18ce5fed3164c74889fa022c8a5b08e, type: 3}
+  pineapple_left: {fileID: 21300000, guid: b5e6d9d9820f5f040ad31583218fb2b4, type: 3}
+  pineapple_right: {fileID: 21300000, guid: 807a961478d66b74097a043607ed7707, type: 3}
+  orange_front: {fileID: 21300000, guid: 7024ca83b43b1244988095e4b85a06b5, type: 3}
+  orange_back: {fileID: 21300000, guid: 5a6f1bf70840aec418f7e5c3b21e8384, type: 3}
+  orange_left: {fileID: 21300000, guid: 455b0828b05189d4fa2f693775f38a24, type: 3}
+  orange_right: {fileID: 21300000, guid: a6e9b67f3104ae64f98da7d4aa37e202, type: 3}
 --- !u!50 &7225827090809746349
 Rigidbody2D:
   serializedVersion: 4
@@ -151,20 +178,6 @@ MonoBehaviour:
   p: {fileID: 4722560150407210107, guid: deada4b71a5e73448a202966eca92eb9, type: 3}
   damage: 5
   pm: {fileID: 0}
---- !u!114 &7225827090809746346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7225827090809746348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9035e996cccc0447b2eba3289e87f6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.25
-  stopDistance: 2.04
 --- !u!114 &-6046096759486156200
 MonoBehaviour:
   m_ObjectHideFlags: 0
