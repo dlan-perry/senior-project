@@ -156,4 +156,9 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single); //also trying additive
     }
+
+    public void ToRegister()
+    {
+        SceneManager.LoadScene("Register", LoadSceneMode.Single); //Reload register screen
+    }
 }
