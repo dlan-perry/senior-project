@@ -1392,7 +1392,6 @@ MonoBehaviour:
   username: {fileID: 127451529}
   password: {fileID: 73573047}
   errorBox: {fileID: 1441780232}
-  userBox: {fileID: 0}
 --- !u!1 &589082512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,7 +1423,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UsernameInput: {fileID: 127451529}
   PasswordInput: {fileID: 73573047}
-  LoginButton: {fileID: 0}
   InputSelected: 0
 --- !u!4 &589082514
 Transform:
