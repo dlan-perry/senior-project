@@ -35,30 +35,35 @@ public class LeaderboardController : MonoBehaviour
             scores1[i, 1] = global[i].high_score.ToString() ;
         }
 
-        /*
         scores2 = new string[local.GetLength(0), 2];
         for (int i = 0; i < local.GetLength(0); i++)
         {
             scores2[i, 0] = local[i].user_id.ToString() + ":" + local[i].username;
             scores2[i, 1] = local[i].high_score.ToString();
         }
-        */
-        scores2 = new string[,] {{ "Player 11" , "1234235"},
-                                { "Player 21" , "4234234"},
-                                { "Player 311" , "12332543"},
-                                { "Player 41" , "90000000"}};
+
     }
 
     public void ShowScores()
     {
         Debug.Log("Called Show Scores");
+        Debug.Log("Calling GetLBSScores()");
+
         GetLBScores(); // get scores before displaying
+        Debug.Log("Finished Calling GetLBSscores()");
         
         //display scores onto TMP elements
         for (int i = 0; i < GlobalUsers.GetLength(0) && i < scores1.GetLength(0); i++)
         {
             GlobalUsers[i].text = scores1[i, 0];
             GlobalScores[i].text = scores1[i, 1];
+
+        }
+
+        for (int i = 0; i < FriendUsers.GetLength(0) && i < scores2.GetLength(0); i++)
+        {
+            FriendUsers[i].text = scores2[i, 0];
+            FriendScores[i].text = scores2[i, 1];
 
         }
 
