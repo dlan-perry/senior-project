@@ -26,13 +26,13 @@ public class LeaderboardController : MonoBehaviour
         Debug.Log("Getting Scores");
         //populate scores1 for global, scores2 for friends
         UserScore[] global = API.getLeaderboard(0).scores;
-        UserScore[] local = API.getLeaderboard(2).scores;
-        //use to populate array
+        UserScore[] local;
+        if (PlayerPersist.getID() != 0){
+            local = API.getLeaderboard(PlayerPersist.getID()).scores;
 
-        scores1 = new string[global.GetLength(0),2];
-        for (int i = 0; i < global.GetLength(0); i++) {
-            scores1[i, 0] = global[i].user_id.ToString() + ":" + global[i].username;
-            scores1[i, 1] = global[i].high_score.ToString() ;
+        }
+        else{
+            local = new UserScore[0];
         }
 
         scores2 = new string[local.GetLength(0), 2];
@@ -41,6 +41,15 @@ public class LeaderboardController : MonoBehaviour
             scores2[i, 0] = local[i].user_id.ToString() + ":" + local[i].username;
             scores2[i, 1] = local[i].high_score.ToString();
         }
+        //use to populate array
+
+        scores1 = new string[global.GetLength(0),2];
+        for (int i = 0; i < global.GetLength(0); i++) {
+            scores1[i, 0] = global[i].user_id.ToString() + ":" + global[i].username;
+            scores1[i, 1] = global[i].high_score.ToString() ;
+        }
+
+        
 
     }
 

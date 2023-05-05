@@ -44,6 +44,10 @@ public static class PlayerPersist
         }
     }
 
+    public static int getID(){
+        return user_id;
+    }
+
     public static string getToken()
     {
         return token;
@@ -122,6 +126,12 @@ public class MainMenu : MonoBehaviour
         {
             errorBox.text = "Error when logging in";
         }
+    }
+
+    public void Register()
+    {
+        Debug.Log("called the register");
+        API.registerUser(username.text, password.text);
     }
 
     IEnumerator waitForResponse()
