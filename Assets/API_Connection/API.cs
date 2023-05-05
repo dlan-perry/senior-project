@@ -14,9 +14,6 @@ public class API : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("API Test Start");
-
-        getLeaderboard(2);
     }
 
 
@@ -112,13 +109,15 @@ public class API : MonoBehaviour
             request = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:8000/scores/");
 
         }
-        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
+        {
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+            string json = reader.ReadToEnd();
+            Debug.Log(json);
+            return JsonUtility.FromJson<Leaderboard>(json);
+        }
 
-        StreamReader reader = new StreamReader(response.GetResponseStream());
-
-        string json = reader.ReadToEnd();
-        Debug.Log(json);
-        return JsonUtility.FromJson<Leaderboard>(json);
+        
     }
 
     public static void score(int score)
